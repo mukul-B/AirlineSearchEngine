@@ -7,7 +7,6 @@ if __name__ == '__main__':
         .appName("airport") \
         .getOrCreate()
         # .config("spark.driver.memory", "15g") \
-    1, "Goroka Airport", "Goroka", "Papua New Guinea", "GKA", "AYGA", -6.081689834590001, 145.391998291, 5282, 10, "U", "Pacific/Port_Moresby", "airport", "OurAirports"
 
     SCHEMA = StructType([StructField('Airport id', IntegerType()),
                          StructField('Name', StringType()),
