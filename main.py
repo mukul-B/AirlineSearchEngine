@@ -8,7 +8,7 @@ if __name__ == '__main__':
         .getOrCreate()
         # .config("spark.driver.memory", "15g") \
 
-    SCHEMA = StructType([StructField('Airport id', IntegerType()),
+    SCHEMA = StructType([StructField('id', IntegerType()),
                          StructField('Name', StringType()),
                          StructField('city', StringType()),
                          StructField('Country', StringType()),
@@ -25,5 +25,5 @@ if __name__ == '__main__':
     # Prepare training and test data.
     data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
         .csv("airports.dat")
-
-    data.show(10)
+    #
+    data.where("id=2").show(10)
