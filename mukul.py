@@ -1,13 +1,12 @@
-from CreateDataframe import get_airports
+from CreateDataframe import get_airports, get_airlines, get_routes
 
-def problem2(spark):
-    data = get_airports(spark)
-    print("45")
-    # airlines = get_airlines(spark)
-    # activeUS = airlines.where("Country='United States' and Active='Y'")
-    # usAirport = data.where("Country='United States'")
-    # usAirport.join(activeUS, "Country").show(1)
-    pass
+
+def problem2(spark,stops = 1):
+
+    airlines = get_airlines(spark)
+    routes = get_routes(spark)
+    airlines.join(routes, "id").where("Stops="+str(stops)).show(10)
+
 
 #Mar 18, 2022
 

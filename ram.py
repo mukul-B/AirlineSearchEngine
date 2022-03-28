@@ -1,4 +1,10 @@
+from CreateDataframe import get_airports
+
+
 def problem3(spark):
+    data = get_airports(spark)
+    # activeUS = airlines.where("Country='United States' and Active='Y'")
+    # usAirport = data.where("Country='United States'")
     pass
 
 

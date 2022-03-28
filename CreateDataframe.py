@@ -38,3 +38,18 @@ def get_airlines(spark):
     data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
         .csv(dir+"airlines.dat")
     return data
+
+def get_routes(spark):
+    SCHEMA = StructType([StructField('Airline', StringType()),
+                         StructField('id', IntegerType()),
+                         StructField('Source_airport', StringType()),
+                         StructField('Source_airport_ID', IntegerType()),
+                         StructField('Destination_airport', StringType()),
+                         StructField('Destination_airport_ID', IntegerType()),
+                         StructField('Codeshare', StringType()),
+                         StructField('Stops', IntegerType()),
+                         StructField('Equipment', StringType())])
+    # Prepare training and test data.
+    data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
+        .csv(dir+"routes.dat")
+    return data
