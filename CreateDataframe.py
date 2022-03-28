@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, DoubleType, IntegerType, StringType
 
+dir = "resource/"
+
+
 def get_airports(spark):
     SCHEMA = StructType([StructField('id', IntegerType()),
                          StructField('Name', StringType()),
@@ -18,8 +21,9 @@ def get_airports(spark):
                          StructField('Source', StringType())])
     # Prepare training and test data.
     data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
-        .csv("airports.dat")
+        .csv(dir+"airports.dat")
     return data
+
 
 def get_airlines(spark):
     SCHEMA = StructType([StructField('id', IntegerType()),
@@ -32,5 +36,5 @@ def get_airlines(spark):
                          StructField('Active', StringType())])
     # Prepare training and test data.
     data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
-        .csv("airlines.dat")
+        .csv(dir+"airlines.dat")
     return data

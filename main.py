@@ -1,34 +1,33 @@
 from pyspark.sql import SparkSession
 
-from CreateDataframe import get_airports, get_airlines
+from ram import *
+from albert import *
+from mukul import *
 
-
-def active_us_airline(spark):
-    data = get_airports(spark)
-    print("45")
-    # airlines = get_airlines(spark)
-    # activeUS = airlines.where("Country='United States' and Active='Y'")
-    # usAirport = data.where("Country='United States'")
-    # usAirport.join(activeUS, "Country").show(1)
-
-
-def passf():
-    print("koi")
-    pass
-
-
-def problem(i):
+if __name__ == '__main__':
     spark = SparkSession.builder.master("local[1]") \
         .appName("airport6") \
         .getOrCreate()
-    switcher = {
-        0: active_us_airline(spark),
-        1: passf
-    }
-    func = switcher.get(i, lambda: 'Invalid')
-    return func()
-
-
-if __name__ == '__main__':
-    prob = 1
-    problem(prob)
+    prob = 2
+    if prob == 1:
+        problem1(spark)
+    elif prob == 2:
+        problem2(spark)
+    elif prob == 3:
+        problem3(spark)
+    elif prob == 4:
+        problem4(spark)
+    elif prob == 5:
+        problem5(spark)
+    elif prob == 6:
+        problem6(spark)
+    elif prob == 7:
+        problem7(spark)
+    elif prob == 8:
+        problem8(spark)
+    elif prob == 9:
+        problem9(spark)
+    elif prob == 10:
+        problem10(spark)
+    else:
+        print("invalid option")
