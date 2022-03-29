@@ -22,3 +22,6 @@ Define a trip as a sequence of connected routes. Find a trip that connects two c
 Find a trip that connects X and Y with less than Z stops (constrained reachability).
 Find all the cities reachable within d hops of a city (bounded reachability).
 Fast Transitive closure/connected component implemented in parallel/distributed algorithms.
+
+set environment variable to run graphframe
+PYSPARK_SUBMIT_ARGS=--packages graphframes:graphframes:0.8.2-spark3.2-s_2.12 pyspark-shell
