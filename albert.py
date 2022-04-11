@@ -8,7 +8,10 @@ def problem1(spark, country):
 #Mar 18, 2022
 def problem5(spark, stops):
     airports = get_airports(spark)
-    airports.filter(airports.Type == 'airport').groupBy('Country').count().show()
+    airports.filter(airports.Type == 'airport')\
+        .groupBy('Country')\
+        .count().withColumnRenamed('count', 'Number of Airports')\
+        .show()
     pass
 
 #Mar 31, 2022
