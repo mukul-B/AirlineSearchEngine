@@ -52,3 +52,15 @@ def get_routes(spark):
     data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
         .csv(dir+"routes.dat")
     return data
+
+def get_countries(spark):
+    SCHEMA = StructType([
+        StructField('Name', StringType()),
+        StructField('Iso_code', StringType()),
+        StructField('Dafif_code', StringType())
+    ])
+
+    data = spark.read.schema(SCHEMA)\
+        .option("header", False).option("delimeter", ",")\
+        .csv(dir+"countries.dat")
+    return data
