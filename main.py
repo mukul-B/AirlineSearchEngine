@@ -8,9 +8,10 @@ if __name__ == '__main__':
     spark = SparkSession.builder.master("local[1]") \
         .appName("airport6") \
         .getOrCreate()
-    prob = 2
+    prob = 5
     if prob == 1:
-        problem1(spark)
+        search_for = "Greenland"
+        problem1(spark, search_for)
     elif prob == 2:
         problem2(spark)
     elif prob == 3:
@@ -18,7 +19,8 @@ if __name__ == '__main__':
     elif prob == 4:
         problem4(spark)
     elif prob == 5:
-        problem5(spark)
+        search_for = 0
+        problem5(spark, search_for)
     elif prob == 6:
         problem6(spark)
     elif prob == 7:
