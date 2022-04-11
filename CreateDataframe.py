@@ -38,7 +38,6 @@ def get_airlines(spark):
     data = spark.read.schema(SCHEMA).option("header", False).option("delimiter", ",") \
         .csv(dir+"airlines.dat")
     return data
-
 def get_routes(spark):
     SCHEMA = StructType([StructField('Airline', StringType()),
                          StructField('id', IntegerType()),

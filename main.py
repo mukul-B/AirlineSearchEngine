@@ -8,11 +8,11 @@ if __name__ == '__main__':
     spark = SparkSession.builder.master("local[1]") \
         .appName("airport6") \
         .getOrCreate()
-    prob = 2
+    prob = 6
     if prob == 1:
         problem1(spark)
     elif prob == 2:
-        problem2(spark)
+        problem2(spark,4)
     elif prob == 3:
         problem3(spark)
     elif prob == 4:
@@ -20,14 +20,12 @@ if __name__ == '__main__':
     elif prob == 5:
         problem5(spark)
     elif prob == 6:
-        problem6(spark)
+        problem6(spark,3)
     elif prob == 7:
         problem7(spark)
     elif prob == 8:
         problem8(spark)
     elif prob == 9:
         problem9(spark)
-    elif prob == 10:
-        problem10(spark)
     else:
         print("invalid option")

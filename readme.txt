@@ -21,6 +21,7 @@ The top k cities with most incoming/outgoing airlines
 Define a trip as a sequence of connected routes. Find a trip that connects two cities X and Y (reachability).
 Find a trip that connects X and Y with less than Z stops (constrained reachability).
 Find all the cities reachable within d hops of a city (bounded reachability).
+
 Fast Transitive closure/connected component implemented in parallel/distributed algorithms.
 
 set environment variable to run graphframe
