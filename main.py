@@ -1,35 +1,35 @@
 from pyspark.sql import SparkSession
 
-from ram import *
-from albert import *
-from mukul import *
+from Aggregate import *
+from Search import *
+from Trip import *
+from transitive import transitive
 
 if __name__ == '__main__':
     spark = SparkSession.builder.master("local[1]") \
         .appName("airport6") \
         .getOrCreate()
     prob = 5
+
     if prob == 1:
-        search_for = "Greenland"
-        problem1(spark, search_for)
+        airport_in_country(spark, country = "Greenland")
     elif prob == 2:
-        problem2(spark)
+        airline_with_stops(spark)
     elif prob == 3:
-        problem3(spark)
+        airline_with_codeshare(spark)
     elif prob == 4:
-        problem4(spark)
+        active_airline(spark)
     elif prob == 5:
-        search_for = 0
-        problem5(spark, search_for)
+        countries_with_highest_airports(spark, stops = 0)
     elif prob == 6:
-        problem6(spark)
+        top_cities_with_airlines(spark)
     elif prob == 7:
-        problem7(spark)
+        trip_from2to(spark,s="LEB",d="PKE")
     elif prob == 8:
-        problem8(spark)
+        trip_to_within_stops(spark, s="LEB", d="PKE", hops=3)
     elif prob == 9:
-        problem9(spark)
+        trip_from_possible_with_hops(spark)
     elif prob == 10:
-        problem10(spark)
+        transitive(spark)
     else:
         print("invalid option")

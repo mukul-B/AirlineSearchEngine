@@ -21,13 +21,14 @@ from typing import Set, Tuple
 
 from pyspark.sql import SparkSession
 
-numEdges = 200
-numVertices = 100
+numEdges = 20
+numVertices = 10
 rand = Random(42)
 
 
 def generateGraph() -> Set[Tuple[int, int]]:
     edges: Set[Tuple[int, int]] = set()
+    rand.seed(237)
     while len(edges) < numEdges:
         src = rand.randrange(0, numVertices)
         dst = rand.randrange(0, numVertices)
@@ -36,14 +37,14 @@ def generateGraph() -> Set[Tuple[int, int]]:
     return edges
 
 
-if __name__ == "__main__":
+def transitive(spark):
     """
     Usage: transitive_closure [partitions]
     """
-    spark = SparkSession\
-        .builder\
-        .appName("PythonTransitiveClosure")\
-        .getOrCreate()
+    # spark = SparkSession\
+    #     .builder\
+    #     .appName("PythonTransitiveClosure")\
+    #     .getOrCreate()
 
     partitions = int(sys.argv[1]) if len(sys.argv) > 1 else 2
     tc = spark.sparkContext.parallelize(generateGraph(), partitions).cache()

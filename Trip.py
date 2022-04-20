@@ -6,26 +6,8 @@ from graphframes import *
 from CreateDataframe import get_airports, get_airlines, get_routes
 
 
-def problem2(spark, stops=1):
-    airlines = get_airlines(spark)
-    routes = get_routes(spark)
-    airlines.join(routes, "id").where("Stops=" + str(stops)).show(10)
 
-
-# Mar 18, 2022
-
-def problem6(spark, top=10):
-    routes = get_routes(spark)
-    airport = get_airports(spark)
-    airportWithRouteS = airport.join(routes,  (
-            routes.Destination_airport_ID == airport.id),
-                                    "inner")
-    airportWithRouteD = airport.join(routes, (routes.Source_airport_ID == airport.id) ,
-                                    "inner")
-    airportWithRoute= airportWithRouteS.union(airportWithRouteD)
-    airportWithRoute.groupBy("city").count().sort(desc("count")).show(top)
-
-def problem7(spark,s="LEB",d="PKE"):
+def trip_from2to(spark, s="LEB", d="PKE"):
 
     routes = get_routes(spark).select("Source_airport_ID","Destination_airport_ID","Airline")\
         .withColumnRenamed("Source_airport_ID","src").withColumnRenamed("Destination_airport_ID","dst")\
@@ -38,7 +20,7 @@ def problem7(spark,s="LEB",d="PKE"):
     ).show()
 
 
-def problem8(spark,s="LEB",d="PKE",hops=4):
+def trip_to_within_stops(spark, s="LEB", d="PKE", hops=4):
 
     routes = get_routes(spark).select("Source_airport_ID","Destination_airport_ID","Airline")\
         .withColumnRenamed("Source_airport_ID","src").withColumnRenamed("Destination_airport_ID","dst")\
@@ -55,7 +37,7 @@ def problem8(spark,s="LEB",d="PKE",hops=4):
 
 
 # Apr 10, 2022
-def problem9(spark,s="LEB",hops=3):
+def trip_from_possible_with_hops(spark, s="LEB", hops=3):
 
     routes = get_routes(spark).select("Source_airport_ID","Destination_airport_ID","Airline")\
         .withColumnRenamed("Source_airport_ID","src").withColumnRenamed("Destination_airport_ID","dst")\
@@ -75,5 +57,4 @@ def problem9(spark,s="LEB",hops=3):
     # g2= graph.find("(a)-[ab]->(b); (b)-[bc]->(c); (c)-[cd]->(d)").where("a.Name='KEF'")
     g2 = graph.find(findString).where("a0.Name='KEF'")
     g2.show()
-
 
