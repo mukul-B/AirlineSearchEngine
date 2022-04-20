@@ -20,7 +20,7 @@ def trip_from2to(spark, s="LEB", d="PKE"):
     ).show()
 
 
-def trip_to_within_stops(spark, s="LEB", d="PKE", hops=4):
+def trip_to_within_stops(spark, s="LEB", d="PKE", stop=4):
 
     routes = get_routes(spark).select("Source_airport_ID","Destination_airport_ID","Airline")\
         .withColumnRenamed("Source_airport_ID","src").withColumnRenamed("Destination_airport_ID","dst")\
@@ -31,7 +31,7 @@ def trip_to_within_stops(spark, s="LEB", d="PKE", hops=4):
     graph.bfs(
         fromExpr="Name = '"+s+"'",
         toExpr="Name = '"+d+"'",
-        maxPathLength=hops,
+        maxPathLength=stop,
     ).show()
 
 
