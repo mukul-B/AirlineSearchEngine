@@ -10,7 +10,9 @@ def countries_with_highest_airports(spark, stops):
     airports = get_airports(spark)
     airports.filter(airports.Type == 'airport') \
         .groupBy('Country') \
-        .count().withColumnRenamed('count', 'Number of Airports') \
+        .count() \
+        .orderBy('count', ascending=False) \
+        .withColumnRenamed('count', 'Number of Airports') \
         .show()
 
 def top_cities_with_airlines(spark, top=10):

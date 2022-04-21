@@ -7,18 +7,21 @@ from CreateDataframe import get_airports, get_airlines, get_routes
 
 
 
-def trip_from2to(spark, s="LEB", d="PKE"):
+def trip_from2to(spark, src="LEB", dst="PKE"):
+    # vertices
+    airports = get_airports(spark) \
+        .select('IATA Code', 'City', 'Country') \
+        .withColumnRenamed('id', 'Airport ID') \
+        .withColumnRenamed('IATA Code', 'id')
 
-    routes = get_routes(spark).select("Source_airport_ID","Destination_airport_ID","Airline")\
-        .withColumnRenamed("Source_airport_ID","src").withColumnRenamed("Destination_airport_ID","dst")\
-        .withColumnRenamed("Airline","relation")
-    airport = get_airports(spark).select("id","IATA Code").withColumnRenamed("IATA Code","Name")
-    graph = GraphFrame(airport, routes)
-    graph.bfs(
-        fromExpr="Name = '"+s+"'",
-        toExpr="Name = '"+d+"'",
-    ).show()
+    # edges
+    routes = get_routes(spark) \
+        .select('Source_airport', 'Destination_airport') \
+        .withColumnRenamed('Source_airport', 'src') \
+        .withColumnRenamed('Destination_airport', 'dst')
 
+    graph = GraphFrame(airports, routes)
+    graph.bfs(f"id='{src}'", f"id='{dst}'").distinct().show(truncate=False)
 
 def trip_to_within_stops(spark, s="LEB", d="PKE", stop=4):
 

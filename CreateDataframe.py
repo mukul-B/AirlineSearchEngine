@@ -3,7 +3,6 @@ from pyspark.sql.types import StructType, StructField, DoubleType, IntegerType, 
 
 dir = "resource/"
 
-
 def get_airports(spark):
     SCHEMA = StructType([StructField('id', IntegerType()),
                          StructField('Name', StringType()),
@@ -61,6 +60,7 @@ def get_countries(spark):
     ])
 
     data = spark.read.schema(SCHEMA)\
-        .option("header", False).option("delimeter", ",")\
+        .option("header", False)\
+        .option("delimeter", ",")\
         .csv(dir+"countries.dat")
     return data
